@@ -1,6 +1,25 @@
-from calculator import add
+import unittest
+from factorial import factorial
 
-def test_add():
-    assert add(2, 3) == 5
-    assert add(-1, 1) == 0
-    assert add(0, 0) == 0
+class TestFactorial(unittest.TestCase):
+
+    def test_factorial_zero(self):
+        self.assertEqual(factorial(0), 1)
+
+    def test_factorial_one(self):
+        self.assertEqual(factorial(1), 1)
+
+    def test_factorial_positive(self):
+        self.assertEqual(factorial(5), 120)
+        self.assertEqual(factorial(7), 5040)
+
+    def test_factorial_negative(self):
+        with self.assertRaises(ValueError):
+            factorial(-1)
+
+    def test_factorial_non_integer(self):
+        with self.assertRaises(ValueError):
+            factorial(3.14)
+
+if __name__ == '__main__':
+    unittest.main()
