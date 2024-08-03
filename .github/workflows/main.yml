@@ -3,7 +3,7 @@ trigger:
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureServiceConnection: 'GitHubConnection'
+  azureServiceConnection: 'github.com_veenashamapant'
   
   # Web app name
   webAppName: 'your-web-app-name'
