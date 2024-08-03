@@ -13,3 +13,26 @@ jobs:
         python-version: '3.x'
     - name: Run tests
       run: python -m unittest test_factorial.py
+
+
+deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Deploy to production
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      run: |
+        # Add your deployment commands here
+        echo "Deploying to production server"
+        # Example: scp -i $DEPLOY_KEY your_app.py user@your-server.com:/path/to/deployment/
